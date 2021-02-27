@@ -47,7 +47,7 @@ services = {
         'BitBucket'       : {'error':r'Repository not found'},
         'Github'          : {'error':r'There isn\\\'t a Github Pages site here\.'},
         'Shopify'         : {'error':r'Sorry\, this shop is currently unavailable\.'},
-        'Fastly'          : {'error':r'Fastly error\: unknown domain\:|Please check that this domain has been added to a service'},
+        'Fastly'          : {'error':r'Fastly error\: unknown domain\:'},
 
         'Ghost'           : {'error':r'The thing you were looking for is no longer here\, or never was'},
         'Heroku'          : {'error':r'no-such-app.html|<title>no such app</title>|herokucdn.com/error-pages/no-such-app.html'},
