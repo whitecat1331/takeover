@@ -198,7 +198,6 @@ def banner():
     print()
 
 
-
 def help(_exit_=False):
     banner()
     print("Usage: %s [OPTION]\n" % sys.argv[0])
