@@ -168,11 +168,12 @@ def request(domain, proxy, timeout, user_agent):
         )
         return req.status_code, req.content
     except Exception:
-        if k_.get("d_list"):
-            print("")
-            warn("Failed to establish a new connection for: %s" % (domain), 1)
-        else:
-            warn("Failed to establish a new connection for: %s" % (domain), 1)
+        pass
+        # if k_.get("d_list"):
+        # print("")
+        # warn("Failed to establish a new connection for: %s" % (domain), 1)
+        # else:
+        # warn("Failed to establish a new connection for: %s" % (domain), 1)
 
 
 def find(status, content, ok):
