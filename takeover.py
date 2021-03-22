@@ -193,6 +193,10 @@ def banner():
     print("#> http://github.com/m4ll0k")
     print("#> fork http://github.com/edoardottt")
     print("-" * 40)
+    print()
+    warn("CHECK AT https://github.com/m4ll0k/takeover IF THE BANNERS WERE UPDATED !")
+    print()
+
 
 
 def help(_exit_=False):
