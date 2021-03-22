@@ -209,7 +209,9 @@ def find(status, content, ok):
             if (
                 re.findall(str(values[1]), str(content), re.I)
                 and int(status) in range(201 if ok is False else 200, 599)
-                and "nginx" not in str(content)  # avoid false positives (Cargo mainly)
+                and "nginx" not in str(content)
+                and "openresty"
+                not in str(content)  # avoid false positives (Cargo mainly)
             ):
                 return str(service), str(values[1])
 
