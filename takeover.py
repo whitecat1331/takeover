@@ -71,7 +71,7 @@ services = {
     "TeamWork": {"error": r"Oops - We didn\'t find your site."},
     "Helpjuice": {"error": r"We could not find what you\'re looking for."},
     "Helpscout": {"error": r"No settings were found for this company:"},
-    "Cargo": {"error": r"<title>404 &mdash; File not found</title>|404 Not Found"},
+    "Cargo": {"error": r"<title>404 &mdash; File not found</title>"},
     "Uservoice": {"error": r"This UserVoice subdomain is currently available"},
     "Surge.sh": {"error": r"project not found"},
     "Intercom": {
