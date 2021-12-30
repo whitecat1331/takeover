@@ -1,5 +1,7 @@
 # Takeover - Subdomain Takeover Finder v0.2
 
+### (@edoardottt fork)
+
 ![screen](https://i.imgur.com/rggaoj8.png)
 ![screen2](https://raw.githubusercontent.com/m4ll0k/takeover/master/screen2.png)
 
