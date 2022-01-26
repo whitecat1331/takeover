@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # takeover - subdomain takeover finder
 # coded by M'hamed (@m4ll0k) Outaadi
-# edited by edoardottt
+# edited by edoardottt (https://github.com/edoardottt/takeover)
 
 import os
 import json
