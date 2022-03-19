@@ -74,7 +74,7 @@ python3 setup.py install
 **or:**
 
 ```
-wget -q https://raw.githubusercontent.com/m4ll0k/takeover/master/takeover.py && python3 takeover.py
+wget -q https://raw.githubusercontent.com/edoardottt/takeover/master/takeover.py && python3 takeover.py
 ```
 
 ## Usage
