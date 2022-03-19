@@ -9,61 +9,60 @@ Sub-domain takeover vulnerability occur when a sub-domain (**subdomain.example.c
 
 ## Supported Services
 
-```
-'Acquia'
-'ActiveCampaign'
-'Aftership'
-'Aha'
-'AWS/S3'
-'Bigcartel'
-'BitBucket'
-'Brightcove'
-'Campaignmonitor'
-'Cargo'
-'CloudFront'
-'Desk'
-'Fastly'
-'FeedPress'
-'GetResponse'
-'Ghost'
-'Github'
-'Helpjuice'
-'Helpscout'
-'Heroku'
-'Intercom'
-'Jetbrains'
-'Kajabi'
-'Mashery'
-'Pantheon'
-'Pingdom'
-'Proposify'
-'S3Bucket'
-'Shopify'
-'Simplebooklet'
-'Smartling'
-'StatuPage'
-'Surge'
-'Surveygizmo'
-'Tave'
-'TeamWork'
-'Thinkific'
-'Tictail'
-'Tilda'
-'Tumbler'
-'Unbounce'
-'Uservoice'
-'Vend'
-'Webflow'
-'Wishpond'
-'Wordpress'
-'ZenDesk'
-'feedpress'
-'readme'
-'statuspage'
-'zendesk'   
-'worksites.net'                                    
-'smugmug'
-```
+- Acquia
+- ActiveCampaign
+- Aftership
+- Aha
+- AWS/S3
+- Bigcartel
+- BitBucket
+- Brightcove
+- Campaignmonitor
+- Cargo
+- CloudFront
+- Desk
+- Fastly
+- FeedPress
+- GetResponse
+- Ghost
+- Github
+- Helpjuice
+- Helpscout
+- Heroku
+- Intercom
+- Jetbrains
+- Kajabi
+- Mashery
+- Pantheon
+- Pingdom
+- Proposify
+- S3Bucket
+- Shopify
+- Simplebooklet
+- Smartling
+- StatuPage
+- Surge
+- Surveygizmo
+- Tave
+- TeamWork
+- Thinkific
+- Tictail
+- Tilda
+- Tumbler
+- Unbounce
+- Uservoice
+- Vend
+- Webflow
+- Wishpond
+- Wordpress
+- ZenDesk
+- feedpress
+- readme
+- statuspage
+- zendesk  
+- worksites.net                                    
+- smugmug
+
 ## Installation:
 
 ```shell
