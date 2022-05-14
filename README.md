@@ -104,4 +104,4 @@ docker run -it --rm takeover -d www.domain.com -v
 
 ---------
 
-This repository is under [MIT License](https://github.com/edoardottt/takeover/blob/main/LICENSE).
+This repository is under [MIT License](https://github.com/edoardottt/takeover/blob/master/LICENSE).
