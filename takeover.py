@@ -42,6 +42,7 @@ k_ = {
 }
 
 
+
 # index/lenght * 100
 def PERCENT(x, y):
     return lambda x, y: float(x) / float(y) * 100
@@ -224,6 +225,7 @@ def banner():
     print("#> by M'hamed (@m4ll0k) Outaadi")
     print("#> http://github.com/m4ll0k")
     print("#> fork http://github.com/edoardottt")
+    print("#> fork http://github.com/whitecat1331")
     print("-" * 40)
     print()
     warn("CHECK AT https://github.com/m4ll0k/takeover IF THE BANNERS WERE UPDATED !")
@@ -381,38 +383,33 @@ def savetxt(path, content, v):
         outtxtfile.close()
     info("Saved at " + path + "..")
 
+USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 \
+    (KHTML, like Gecko) Chrome/76.0.3809.36 Safari/537.36"
 
-def main():
-    # --
-    if len(sys.argv) < 2:
-        help(1)
-    try:
-        opts, _ = getopt.getopt(
-            sys.argv[1:],
-            "d:l:p:o:t:T::u:kv",
-            ["d=", "l=", "p=", "v", "o=", "t=", "T=", "u=", "k"],
-        )
-    except Exception as e:
-        warn(e, 1)
-    for o, a in opts:
-        if o == "-d":
-            k_["domain"] = a
-        if o == "-t":
-            k_["threads"] = int(a)
-        if o == "-l":
-            k_["d_list"] = a
-        if o == "-p":
-            k_["proxy"] = a
-        if o == "-o":
-            k_["output"] = a
-        if o == "-T":
-            k_["timeout"] = int(a)
-        if o == "-k":
-            k_["process"] = True
-        if o == "-u":
-            k_["user_agent"] = a
-        if o == "-v":
-            k_["verbose"] = True
+
+
+def main(domain=None, threads=1, d_list=None, 
+         proxy=None, output=None, timeout=None, 
+         process=False, user_agent=USER_AGENT, verbose=False):
+
+    if not os.path.isdir("results"):
+        os.mkdir("results")
+    orig_stdout = sys.stdout
+    f = open("results/takeover.out", 'w')
+    sys.stdout = f
+
+    k_ = {
+        "domain": domain,
+        "threads": threads,
+        "d_list": d_list,
+        "proxy": proxy,
+        "output": output,
+        "timeout": timeout,
+        "process": process,
+        "user_agent": user_agent,
+        "verbose": verbose,
+        "dict_len": 0,
+    }
 
     if k_.get("domain") or k_.get("d_list"):
         banner()
@@ -440,6 +437,10 @@ def main():
                 )
     elif k_.get("domain") is None and k_.get("d_list") is None:
         help(1)
+
+    sys.stdout = orig_stdout
+    f.close()
+
 
 
 if __name__ == "__main__":
