@@ -390,13 +390,13 @@ USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36
 
 def main(domain=None, threads=1, d_list=None, 
          proxy=None, output=None, timeout=None, 
-         process=False, user_agent=USER_AGENT, verbose=False):
+         process=False, user_agent=USER_AGENT, verbose=False,
+         stdout=None):
 
-    if not os.path.isdir("results"):
-        os.mkdir("results")
-    orig_stdout = sys.stdout
-    f = open("results/takeover.out", 'w')
-    sys.stdout = f
+    if stdout:
+        orig_stdout = sys.stdout
+        f = open(stdout, 'w')
+        sys.stdout = f
 
     k_ = {
         "domain": domain,
