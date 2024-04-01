@@ -388,18 +388,13 @@ USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36
 
 
 
-def main(domain=None, threads=1, d_list=None, 
+def main(domains=[], threads=1, d_list=None, 
          proxy=None, output=None, timeout=None, 
-         process=False, user_agent=USER_AGENT, verbose=False,
-         stdout=None):
+         process=False, user_agent=USER_AGENT, verbose=False):
 
-    if stdout:
-        orig_stdout = sys.stdout
-        f = open(stdout, 'w')
-        sys.stdout = f
 
     k_ = {
-        "domain": domain,
+        "domains": domains,
         "threads": threads,
         "d_list": d_list,
         "proxy": proxy,
@@ -411,17 +406,14 @@ def main(domain=None, threads=1, d_list=None,
         "dict_len": 0,
     }
 
-    if k_.get("domain") or k_.get("d_list"):
-        banner()
-        domains = []
+    if k_.get("domains") or k_.get("d_list"):
+        # banner()
         if k_.get("verbose"):
             info("Starting..")
 
         if k_.get("d_list"):
             domains.extend(readfile(k_.get("d_list")))
-        else:
-            domains.append(k_.get("domain"))
-        k_["domains"] = domains
+
         k_["dict_len"] = len(domains)
         runner(k_)
         if k_.get("output"):
@@ -435,11 +427,11 @@ def main(domain=None, threads=1, d_list=None,
                     % k_.get("output").split(".")[1],
                     1,
                 )
-    elif k_.get("domain") is None and k_.get("d_list") is None:
+    elif k_.get("domains") is None and k_.get("d_list") is None:
         help(1)
 
-    sys.stdout = orig_stdout
-    f.close()
+    return k_["output"]
+
 
 
 
