@@ -13,6 +13,8 @@ import getopt
 import sys
 import re
 
+from icecream import ic
+
 
 r = "\033[1;31m"
 g = "\033[1;32m"
@@ -215,6 +217,7 @@ def find(status, content, ok):
                 not in str(content)  # avoid false positives (Cargo mainly)
             ):
                 return str(service), str(values[1])
+    return ('', 'No Service Found')
 
 
 def banner():
@@ -300,7 +303,11 @@ def runner(k):
         )
         for domain in k.get("domains")
     )
-    for i, _ in enumerate(thread.as_completed(futures)):
+    potential_takeovers = []
+    for i, val in enumerate(thread.as_completed(futures)):
+        result = val.result()
+        if result:
+            potential_takeovers.append(result)
         if k.get("verbose") and k.get("d_list"):
             str_ = "{i}{b:.2f}% Domain: {d}".format(
                 i=_info(),
@@ -311,6 +318,7 @@ def runner(k):
         # else:
         # info("Domain: {}".format(k.get("domains")[i]))
         pass
+    return potential_takeovers
 
 
 def requester(domain, proxy, timeout, user_agent, output, ok, v):
@@ -344,6 +352,7 @@ def requester(domain, proxy, timeout, user_agent, output, ok, v):
                 )
             if v:
                 err(error)
+    return {"service": service, "domain": domain}
 
 
 def savejson(path, content, v):
@@ -405,6 +414,7 @@ def main(domains=[], threads=1, d_list=None,
         "verbose": verbose,
         "dict_len": 0,
     }
+    global takeovers
 
     if k_.get("domains") or k_.get("d_list"):
         # banner()
@@ -415,7 +425,7 @@ def main(domains=[], threads=1, d_list=None,
             domains.extend(readfile(k_.get("d_list")))
 
         k_["dict_len"] = len(domains)
-        runner(k_)
+        takeovers = runner(k_)
         if k_.get("output"):
             if ".txt" in k_.get("output"):
                 savetxt(k_.get("output"), _output, k_.get("verbose"))
@@ -430,8 +440,15 @@ def main(domains=[], threads=1, d_list=None,
     elif k_.get("domains") is None and k_.get("d_list") is None:
         help(1)
 
-    return k_["output"]
+    return filter_no_service(takeovers)
 
+def filter_no_service(takeover_results):
+    takeovers = []
+    for domain in takeover_results:
+        if domain["service"]:
+            takeovers.append(domain)
+
+    return takeovers
 
 
 
