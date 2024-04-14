@@ -12,6 +12,8 @@ import urllib3
 import getopt
 import sys
 import re
+import logging
+import traceback
 
 from icecream import ic
 
@@ -197,8 +199,8 @@ def request(domain, proxy, timeout, user_agent):
             proxies=proxies,
         )
         return req.status_code, req.content
-    except Exception:
-        pass
+    except Exception as e:
+        logging.warning(e, traceback.format_exc())
         # if k_.get("d_list"):
         # print("")
         # warn("Failed to establish a new connection for: %s" % (domain), 1)
@@ -285,7 +287,6 @@ def print_(string):
     sys.stdout.write(string)
     sys.stdout.flush()
 
-
 def runner(k):
     threadpool = thread.ThreadPoolExecutor(max_workers=k.get("threads"))
     if k.get("verbose"):
@@ -317,42 +318,44 @@ def runner(k):
             print_(str_)
         # else:
         # info("Domain: {}".format(k.get("domains")[i]))
-        pass
     return potential_takeovers
 
 
 def requester(domain, proxy, timeout, user_agent, output, ok, v):
-    code, html = request(domain, proxy, timeout, user_agent)
-    service, error = find(code, html, ok)
-    if service and error:
-        if output:
-            _output.append((domain, service, error))
-            if v and not k_.get("d_list"):
-                plus(
-                    "%s service found! Potential domain takeover found! - %s"
-                    % (service, domain)
-                )
-            elif v and k_.get("d_list"):
-                print("")
-                plus(
-                    "%s service found! Potential domain takeover found! - %s"
-                    % (service, domain)
-                )
-        else:
-            if k_.get("d_list"):
-                print("")
-                plus(
-                    "%s service found! Potential domain takeover found! - %s"
-                    % (service, domain)
-                )
-            elif not k_.get("d_list"):
-                plus(
-                    "%s service found! Potential domain takeover found! - %s"
-                    % (service, domain)
-                )
-            if v:
-                err(error)
-    return {"service": service, "domain": domain}
+    try:
+        code, html = request(domain, proxy, timeout, user_agent)
+        service, error = find(code, html, ok)
+        if service and error:
+            if output:
+                _output.append((domain, service, error))
+                if v and not k_.get("d_list"):
+                    plus(
+                        "%s service found! Potential domain takeover found! - %s"
+                        % (service, domain)
+                    )
+                elif v and k_.get("d_list"):
+                    print("")
+                    plus(
+                        "%s service found! Potential domain takeover found! - %s"
+                        % (service, domain)
+                    )
+            else:
+                if k_.get("d_list"):
+                    print("")
+                    plus(
+                        "%s service found! Potential domain takeover found! - %s"
+                        % (service, domain)
+                    )
+                elif not k_.get("d_list"):
+                    plus(
+                        "%s service found! Potential domain takeover found! - %s"
+                        % (service, domain)
+                    )
+                if v:
+                    err(error)
+        return {"service": service, "domain": domain}
+    except Exception as e:
+        logging.warning("Request Failed\n", e, traceback.format_exc())
 
 
 def savejson(path, content, v):
@@ -401,6 +404,11 @@ def main(domains=[], threads=1, d_list=None,
          proxy=None, output=None, timeout=None, 
          process=False, user_agent=USER_AGENT, verbose=False):
 
+    logging.basicConfig(filename="takeover.log",
+                    format='%(asctime)s %(message)s',
+                    filemode='w')
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
 
     k_ = {
         "domains": domains,
@@ -456,5 +464,5 @@ if __name__ == "__main__":
     try:
         main()
     except (KeyboardInterrupt) as e:
-        print(e)
+        logging.info(e, traceback.format_exc())
         sys.exit(0)
